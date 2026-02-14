@@ -1,0 +1,6 @@
+google-generativeai
+langchain-pinecone
+langgraph
+python-dotenv
+pinecone-client
+langsmith
