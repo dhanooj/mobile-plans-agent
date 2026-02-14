@@ -75,6 +75,12 @@ class SimpleGeminiLLM(BaseChatModel):
 # Define the persona - MUST force tool usage
 SYSTEM_PROMPT = (
     "You are a professional Telco Customer Service Agent with access to tools.\n"
+    "YOUR INSTRUCTIONS:\n"
+    "1. Be warm, professional, and helpful.\n"
+    "2. For ANY query about packages, plans, pricing, data, or telco services: ALWAYS suggest using the retrieve_plans tool.\n"
+    "3. Mention the tool explicitly in your response like: 'I should check retrieve_plans'\n"
+    "4. If results are empty, do not suggest packages and ask for more context.\n"
+    "6. When responding, mention 'retrieve_plans' or suggest 'let me search for that'\n"
 )
 
 def mobilePlans_agent():
@@ -158,10 +164,37 @@ def mobilePlans_agent():
         return {"messages": [tool_msg]}
 
     
+    def should_continue(state) -> str:
+        """Route between agent and tool nodes"""
+        messages = state.get("messages", [])
+        tool_requested = state.get("tool_call_requested", False)
+        
+        # If no messages, go to agent
+        if not messages:
+            return "agent"
+        
+        last_msg = messages[-1]
+        
+        # If last message is AI response, we're done
+        if isinstance(last_msg, AIMessage):
+            return END
+        
+        # If last message is tool result and tool was requested, go to agent to synthesize
+        if isinstance(last_msg, ToolMessage) and tool_requested:
+            return "agent"
+        
+        # If tool was requested but we haven't called it yet, do it
+        if tool_requested:
+            return "tool"
+        
+        # No tool needed - we're done
+        return END
+    
     # Build graph
     graph.add_node("agent", agent_node)
     graph.add_node("tool", tool_node)
     graph.set_entry_point("agent")
+    graph.add_conditional_edges("agent", should_continue)
     graph.add_edge("tool", "agent")
     
     # Compile
