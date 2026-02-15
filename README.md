@@ -13,6 +13,7 @@ LangSmith tracing enabled for observability
 LangSmith SDK used for automated evaluation
 
 🏗️ Project Structure
+```python
 .
 ├── packageScrape.ipynb   # Scrapes mobile packages and indexes them in Pinecone
 ├── graph.py              # LangGraph agent orchestration using Gemini LLM and Pinecone
@@ -21,22 +22,23 @@ LangSmith SDK used for automated evaluation
 ├── .env.example         # Sample environment variables file
 ├── requirements.txt     # Python dependencies
 └── README.md
-
+```
 ⚙️ Environment Variables
 
 Configuration is managed using environment variables.
 
 Create a .env file in the project root:
-
+```python
 PINECONE_API_KEY=""
 PINECONE_ENV=""
 PINECONE_INDEX=""
 GOOGLE_API_KEY=""
 LANGSMITH_API_KEY=""
 LANGSMITH_PROJECT=""
-
+```
 
 🧠 Architecture
+```python
 User Query
     │
     ▼
@@ -52,7 +54,7 @@ LangGraph Agent (graph.py)
 
 Tracing & Evaluation
     └── LangSmith
-
+```
 
 🧰 Tech Stack
 
