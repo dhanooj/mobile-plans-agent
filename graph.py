@@ -3,7 +3,6 @@ from langgraph.graph import StateGraph, END
 from langgraph.checkpoint.memory import MemorySaver
 from tools import get_retrieval_tool
 import os
-import re
 from dotenv import load_dotenv
 from typing import Any
 from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
@@ -80,7 +79,8 @@ SYSTEM_PROMPT = (
     "2. For ANY query about packages, plans, pricing, data, or telco services: ALWAYS suggest using the retrieve_plans tool.\n"
     "3. Mention the tool explicitly in your response like: 'I should check retrieve_plans'\n"
     "4. If results are empty, do not suggest packages and ask for more context.\n"
-    "6. When responding, mention 'retrieve_plans' or suggest 'let me search for that'\n"
+    "6. When responding, mention 'retrieve_plans' else suggest 'let me search for that'\n"
+    "7. When responding, give the most relatable packages 1st'\n"
 )
 
 def mobilePlans_agent():

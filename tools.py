@@ -45,7 +45,7 @@ def get_retrieval_tool():
         
         result = "Here are the relevant packages:\n\n"
         for doc in docs:
-            result += f"- {doc.page_content[:100]}\n"
+            result += f"- description {doc.page_content} ,price and validity {doc.metadata}\n"
         return result
 
     return Tool(
