@@ -1,7 +1,10 @@
 import os
 from dotenv import load_dotenv
+
 from pinecone import Pinecone
+
 import google.generativeai as genai
+
 from langchain_core.tools import Tool
 from langchain_core.embeddings import Embeddings
 from langchain_pinecone import PineconeVectorStore
