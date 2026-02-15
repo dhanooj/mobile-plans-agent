@@ -5,17 +5,11 @@ An AI-powered agent that lists and answers questions about mobile data packages 
 🚀 Features
 
 Scrapes mobile package data from a local service provider
-
 Stores package embeddings in Pinecone vector database
-
 Uses LangGraph to orchestrate an AI agent workflow
-
 Gemini LLM generates contextual answers
-
 Pinecone index used as retrieval tool
-
 LangSmith tracing enabled for observability
-
 LangSmith SDK used for automated evaluation
 
 🏗️ Project Structure
@@ -37,9 +31,7 @@ Create a .env file in the project root:
 PINECONE_API_KEY=""
 PINECONE_ENV=""
 PINECONE_INDEX=""
-
 GOOGLE_API_KEY=""
-
 LANGSMITH_API_KEY=""
 LANGSMITH_PROJECT=""
 
@@ -65,24 +57,16 @@ Tracing & Evaluation
 🧰 Tech Stack
 
 LangGraph
-
 Gemini LLM
-
 Pinecone Vector Database
-
 LangSmith
-
 Python
-
 Jupyter Notebook
 
 📈 Future Improvements
 
 Improve the Pinecone index for better retrieval results
-
 Support multiple service providers (add more nodes to the LangGraph and conditional edges)
-
 Support multiple LLMs (add more nodes to the LangGraph and conditional edges)
-
 Add more criteria for evaluation
 
