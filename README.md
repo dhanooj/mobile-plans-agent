@@ -1,6 +1,6 @@
 # 📱 Mobile Package Listing Agent
 
-An AI-powered agent that lists and answers questions about mobile data packages from a local service provider. The system uses scraped mobile plan data indexed in Pinecone and a LangGraph-orchestrated agent powered by Gemini LLM to generate intelligent responses. LangSmith is used for tracing and evaluation.
+An AI-powered agent that lists and answers questions about synthetic mobile data packages. The system uses scraped mobile plan data indexed in Pinecone and a LangGraph-orchestrated agent powered by Gemini LLM to generate intelligent responses. LangSmith is used for tracing and evaluation.
 
 ## 🚀 Features
 
@@ -15,7 +15,7 @@ An AI-powered agent that lists and answers questions about mobile data packages 
 ## 🏗️ Project Structure
 ```python
 .
-├── packageScrape.ipynb   # Scrapes mobile packages and indexes them in Pinecone
+├── index_packages.py     # Sample mobile packages and indexes them in Pinecone
 ├── graph.py              # LangGraph agent orchestration using Gemini LLM and Pinecone
 ├── tools.py              # Pinecone retrieval tool to list mobile packages
 ├── evaluator.ipynb       # LangSmith evaluation of agent responses
@@ -52,7 +52,7 @@ LangGraph Agent (graph.py)
     └── Pinecone Retrieval Tool (tools.py)
             │
             ▼
-        Pinecone Index(Scraped mobile plans from packageScrape.ipynb)
+        Pinecone Index(indexed mobile plans from index_packages.py)
 
 
 Tracing & Evaluation

@@ -1,9 +1,12 @@
-from langchain_pinecone import PineconeVectorStore
+import os
+from dotenv import load_dotenv
+from pinecone import Pinecone
 import google.generativeai as genai
 from langchain_core.tools import Tool
 from langchain_core.embeddings import Embeddings
-from config import pinecone_index
-import os
+from langchain_pinecone import PineconeVectorStore
+
+load_dotenv()
 
 class GeminiEmbeddings(Embeddings):
     def embed_documents(self, texts):
@@ -28,6 +31,10 @@ def get_retrieval_tool():
     genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
     embeddings = GeminiEmbeddings()
     
+    # # Initialize Pinecone Client
+    pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
+    pinecone_index = pc.Index(os.getenv("PINECONE_INDEX"))
+
     # Use the LangChain Pinecone integration
     vector_store = PineconeVectorStore(
         index=pinecone_index, 
